@@ -8,10 +8,10 @@ from vistas.CoursesLogic import Courses, Course, GetNumCoursesByTimeRange, SoftD
 app = Flask(__name__)
 app.config.from_object("config.Config")
 
-# @app.before_first_request
 
-# def create_tables():
-# db.create_all()
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 
 db.init_app(app)
