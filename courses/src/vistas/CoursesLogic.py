@@ -51,7 +51,7 @@ class Courses(Resource):
             return {
                 "msg": "No se pudo hacer la búsqueda"
                 }, 400
-    class GetNumCoursesByTimeRange(Resource):
+class GetNumCoursesByTimeRange(Resource):
         def get(self):
             if  request.is_json:
                 parse_json = request.get_json()
@@ -70,7 +70,7 @@ class Courses(Resource):
                 return {
                     "msg": "No se pudo hacer la consulta"
                     }, 400
-    class RestoreDeletedCourse(Resource):
+class RestoreDeletedCourse(Resource):
         def put(self, courseId):
             course = CourseModel.query.get(courseId)
             if not course:
@@ -81,7 +81,7 @@ class Courses(Resource):
                 course.deletedAt = None
                 db.session.commit()
                 return "Course was restored", 200
-    class SoftDelete(Resource):
+class SoftDelete(Resource):
         def put(self, courseId):
             course = CourseModel.query.get(courseId)
             if not course:
@@ -92,7 +92,7 @@ class Courses(Resource):
                 course.deletedAt = datetime.datetime.now()
                 db.session.commit()
                 return str(course.deletedAt), 200
-    class Course(Resource):
+class Course(Resource):
         def get(self, courseId):
             course = CourseModel.query.get(courseId)
             if not course:
@@ -135,6 +135,6 @@ class Courses(Resource):
                 return {
                     "msg": "No se pudo modificar el curso"
                     }, 400
-    class HealthCheck(Resource):
+class HealthCheck(Resource):
         def get(self):
             return "Pong", 200
